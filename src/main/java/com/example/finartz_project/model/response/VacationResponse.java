@@ -1,10 +1,7 @@
 package com.example.finartz_project.model.response;
 
 import com.example.finartz_project.model.dto.VacationDto;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 public class VacationResponse {

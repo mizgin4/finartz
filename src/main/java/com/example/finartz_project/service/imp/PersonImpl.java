@@ -1,8 +1,6 @@
 package com.example.finartz_project.service.imp;
 
 import com.example.finartz_project.model.request.CreateMemberRequest;
-//import com.example.finartz_project.converter.PersonConverter;
-//import com.example.finartz_project.converter.PersonRequestConverter;
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.dto.MemberDto;
 import com.example.finartz_project.model.response.SignUpResponse;
@@ -25,17 +23,6 @@ public class PersonImpl implements MemberService {
 
     }
 
-
-//    @Override
-//    public MemberDto createMember(CreateMemberRequest request) throws Exception {
-//        Optional<MemberEntity> optionalMemberEntity = personRepository.existsPeopleByEmail(request.getEmail());
-//        if (!optionalMemberEntity.isPresent()) {
-//            throw new Exception("Member already exist");
-//        }
-//        MemberDto memberDto = CreateMemberRequestConverter.convert(request);
-//        personRepository.save(MemberConverter.convert(memberDto));
-//        return memberDto;
-//    }
 
 
     @Override

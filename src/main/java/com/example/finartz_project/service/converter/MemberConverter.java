@@ -21,18 +21,4 @@ public class MemberConverter {
     }
 }
 
-//    public MemberDto convert(MemberEntity source) {
-//        if (source==null){
-//            return null;
-//        }
-//        MemberDto memberDto = new MemberDto();
-//        memberDto.setId(source.getId());
-//        memberDto.setBirthDay(source.getBirthDay());
-//        memberDto.setName(source.getName());
-//        memberDto.setLastName(source.getLastName());
-//        memberDto.setEmail(source.getEmail());
-//        memberDto.setPassword(source.getPassword());
-//        return memberDto;
-//
-//    }
 
