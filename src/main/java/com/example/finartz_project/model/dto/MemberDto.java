@@ -1,15 +1,18 @@
 package com.example.finartz_project.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
-public class PersonDto {
+public class MemberDto {
 
-    private Long id;
+    private Long memberId;
 
     private String name;
     private String lastName;
     private LocalDateTime birthDay;
     private String email;
+    @JsonIgnore
     private String password;
 
     public String getEmail() {
@@ -28,12 +31,12 @@ public class PersonDto {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public String getName() {

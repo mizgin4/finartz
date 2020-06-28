@@ -1,53 +1,56 @@
 package com.example.finartz_project.service.imp;
 
-import com.example.finartz_project.controller.request.CreateMemberRequest;
-import com.example.finartz_project.converter.PersonConverter;
-import com.example.finartz_project.converter.PersonRequestConverter;
-import com.example.finartz_project.model.Person;
-import com.example.finartz_project.model.dto.PersonDto;
+import com.example.finartz_project.model.request.CreateMemberRequest;
+//import com.example.finartz_project.converter.PersonConverter;
+//import com.example.finartz_project.converter.PersonRequestConverter;
+import com.example.finartz_project.model.entity.MemberEntity;
+import com.example.finartz_project.model.dto.MemberDto;
+import com.example.finartz_project.model.response.SignUpResponse;
 import com.example.finartz_project.repository.PersonRepository;
 import com.example.finartz_project.service.MemberService;
+import com.example.finartz_project.service.converter.CreateMemberRequestConverter;
+import com.example.finartz_project.service.converter.MemberConverter;
 import org.springframework.stereotype.Service;
+
+
+import java.util.Optional;
 
 @Service
 public class PersonImpl implements MemberService {
 
     private final PersonRepository personRepository;
-    private final PersonConverter personConverter;
-    private final PersonRequestConverter personRequestConverter;
 
-
-    public PersonImpl(PersonRepository personRepository, PersonConverter personConverter, PersonRequestConverter personRequestConverter) {
+    public PersonImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.personConverter = personConverter;
-        this.personRequestConverter = personRequestConverter;
-
 
     }
+
+
+//    @Override
+//    public MemberDto createMember(CreateMemberRequest request) throws Exception {
+//        Optional<MemberEntity> optionalMemberEntity = personRepository.existsPeopleByEmail(request.getEmail());
+//        if (!optionalMemberEntity.isPresent()) {
+//            throw new Exception("Member already exist");
+//        }
+//        MemberDto memberDto = CreateMemberRequestConverter.convert(request);
+//        personRepository.save(MemberConverter.convert(memberDto));
+//        return memberDto;
+//    }
 
 
     @Override
-    public PersonDto createMember(CreateMemberRequest request) {
-        if (personRepository.existsPeopleByEmail(request.getEmail())){
-            System.out.println("Birseyler oluyor");
-
-            return null;
+    public SignUpResponse createMember(CreateMemberRequest request) throws Exception {
+        Optional<MemberEntity> optionalMember = personRepository.existsPeopleByEmail(request.getEmail());
+        if (!optionalMember.isPresent()) {
+            throw new Exception("Member already exist");
         }
-        else{
-            Person convert = personConverter.convert(personRequestConverter.convert(request));
-            Person save = personRepository.save(convert);
-            PersonDto convert1 = personConverter.convert(save);
-            return convert1;
-        }
+        MemberDto memberDto = CreateMemberRequestConverter.convert(request);
+        personRepository.save(MemberConverter.convert(memberDto));
 
-
-
+        //
+        return SignUpResponse.getResponse(memberDto);
 
     }
 
 
-    @Override
-    public PersonDto getPersonbyId(Long id) {
-        return null;
-    }
 }

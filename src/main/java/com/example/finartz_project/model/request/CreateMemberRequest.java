@@ -1,4 +1,4 @@
-package com.example.finartz_project.controller.request;
+package com.example.finartz_project.model.request;
 
 import java.time.LocalDateTime;
 

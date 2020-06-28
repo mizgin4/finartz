@@ -1,16 +1,16 @@
-package com.example.finartz_project.model;
+package com.example.finartz_project.model.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
-public class Person {
+public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-    private Long id;
+    private Long memberId;
 
 
     private String name;
@@ -22,6 +22,10 @@ public class Person {
     private String email;
 
     private String password;
+
+    @OneToMany(mappedBy = "memberEntitySql")
+    private List<VacationEntity> vacationEntity;
+
 
     public String getEmail() {
         return email;
@@ -39,12 +43,11 @@ public class Person {
         this.password = password;
     }
 
-    public Long getId() {
-        return id;
+    public Long getMemberId() {
+        return memberId;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setMemberId(Long id) {
+        this.memberId = id;
     }
 
     public String getName() {
