@@ -1,7 +1,9 @@
 package com.example.finartz_project.model.entity;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -24,7 +26,11 @@ public class MemberEntity {
     private String password;
 
     @OneToMany(mappedBy = "memberEntitySql")
-    private List<VacationEntity> vacationEntity;
+    private List<DemandEntity> demandEntity;
+
+    @ManyToMany
+    @JoinColumn(name = "roleId")
+    public Collection<RoleEntity> roleEntities;
 
 
     public String getEmail() {

@@ -1,7 +1,7 @@
 package com.example.finartz_project.controller;
 
-import com.example.finartz_project.model.request.CreateMemberRequest;
-import com.example.finartz_project.model.response.SignUpResponse;
+import com.example.finartz_project.controller.request.CreateMemberRequest;
+import com.example.finartz_project.controller.response.SignUpResponse;
 import com.example.finartz_project.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

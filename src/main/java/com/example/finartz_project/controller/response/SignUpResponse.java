@@ -1,4 +1,4 @@
-package com.example.finartz_project.model.response;
+package com.example.finartz_project.controller.response;
 
 import com.example.finartz_project.model.dto.MemberDto;
 
