@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/vacation")
+@RequestMapping("/demand")
 public class DemandController {
     private final DemandService demandService;
 
@@ -21,7 +21,7 @@ public class DemandController {
         this.demandService = demandService;
     }
 
-    @PostMapping("/vacationrequest")
+    @PostMapping("/demandrequest")
     public ResponseEntity<DemandResponse> demandRequest(@RequestBody CreateDemandRequest request) {
         return ResponseEntity.ok(demandService.vacationRequest(request));
 

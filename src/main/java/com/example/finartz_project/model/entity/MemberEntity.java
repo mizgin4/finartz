@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -29,8 +30,11 @@ public class MemberEntity {
     private List<DemandEntity> demandEntity;
 
     @ManyToMany
-    @JoinColumn(name = "roleId")
-    public Collection<RoleEntity> roleEntities;
+    @JoinTable(
+            name = "course_like",
+            joinColumns = @JoinColumn(name = "memberId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId"))
+    List<RoleEntity> roleEntities;
 
 
     public String getEmail() {

@@ -14,6 +14,7 @@ public class SignUpResponse {
         response.setLastName(memberDto.getLastName());
         response.getEmail(memberDto.getEmail());
         return response;
+
     }
 
     private Long memberId;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 class MemberServiceImpl implements MemberService {
@@ -22,13 +23,13 @@ class MemberServiceImpl implements MemberService {
         this.memberRepository = memberRepository;
 
     }
-
+    Random random=new Random();
 
 
     @Override
     public SignUpResponse createMember(CreateMemberRequest request) throws Exception {
         Optional<MemberEntity> optionalMember = memberRepository.getMembetByEmail(request.getEmail());
-        if (!optionalMember.isPresent()) {
+        if (optionalMember.isPresent()) {
             throw new Exception("Member already exist");
         }
         MemberDto memberDto = CreateMemberRequestConverter.convert(request);

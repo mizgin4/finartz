@@ -20,8 +20,8 @@ public class RoleEntity {
 
     //NeedMemberEntity
 
-    @ManyToMany(mappedBy = "roleEntities")
-    public Collection<MemberEntity> members;
+    @ManyToMany
+    List<MemberEntity> memberEntities;
 
 }
 
