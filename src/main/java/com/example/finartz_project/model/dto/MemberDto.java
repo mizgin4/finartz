@@ -1,15 +1,19 @@
 package com.example.finartz_project.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 
 public class MemberDto {
 
-    private Long memberId;
+    //private Long memberId;
 
     private String name;
     private String lastName;
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     private LocalDateTime birthDay;
     private String email;
     @JsonIgnore
@@ -31,13 +35,13 @@ public class MemberDto {
         this.password = password;
     }
 
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
+//    public Long getMemberId() {
+//        return memberId;
+//    }
+//
+//    public void setMemberId(Long memberId) {
+//        this.memberId = memberId;
+//    }
 
     public String getName() {
         return name;

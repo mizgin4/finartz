@@ -1,11 +1,15 @@
 package com.example.finartz_project.controller.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 public class CreateMemberRequest {
 
     private String name;
     private String lastName;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
     private String email;
     private String password;
@@ -25,6 +29,7 @@ public class CreateMemberRequest {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
     public LocalDateTime getBirthDay() {
         return birthDay;

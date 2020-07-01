@@ -9,7 +9,7 @@ public class MemberConverter {
             return null;
         }
         MemberEntity memberEntity = new MemberEntity();
-        memberEntity.setMemberId(source.getMemberId());
+        //memberEntity.setMemberId(source.getMemberId());
         memberEntity.setBirthDay(source.getBirthDay());
         memberEntity.setName(source.getName());
         memberEntity.setLastName(source.getLastName());

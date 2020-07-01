@@ -1,22 +1,35 @@
 package com.example.finartz_project.controller.request;
 
+import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.enums.DemandType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class CreateDemandRequest {
-    private Long vacationId;
+    //private Long vacationId;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
-
     private DemandType demandType;
+    private MemberEntity member;
 
 
+    public MemberEntity getMember() {
+        return member;
+    }
+
+    public void setMember(MemberEntity member) {
+        this.member = member;
+    }
 
     public DemandType getDemandType() {
         return demandType;
@@ -29,13 +42,13 @@ public class CreateDemandRequest {
 
 
 
-    public Long getVacationId() {
-        return vacationId;
-    }
-
-    public void setVacationId(Long vacationId) {
-        this.vacationId = vacationId;
-    }
+//    public Long getVacationId() {
+//        return vacationId;
+//    }
+//
+//    public void setVacationId(Long vacationId) {
+//        this.vacationId = vacationId;
+//    }
 
     public LocalDateTime getStartDate() {
         return startDate;
@@ -52,6 +65,7 @@ public class CreateDemandRequest {
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
+
 
 
 }

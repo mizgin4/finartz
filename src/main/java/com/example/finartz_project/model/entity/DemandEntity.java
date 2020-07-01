@@ -4,9 +4,12 @@ import com.example.finartz_project.model.enums.DemandType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class DemandEntity {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,8 +28,9 @@ public class DemandEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "memberId",insertable = false,updatable = false)
-    public MemberEntity memberEntitySql;
+    //@JoinColumn(name = "member")
+    public MemberEntity member;
+
 
 
 
@@ -73,5 +77,16 @@ public class DemandEntity {
         this.totalVacationTime = totalVacationTime;
     }
 
+    public MemberEntity getMember() {
+        return member;
+    }
 
+    public void setMember(MemberEntity member) {
+        this.member = member;
+    }
+
+    public DemandEntity(){
+
+    }
 }
+

@@ -1,13 +1,17 @@
 package com.example.finartz_project.model.dto;
 
 
+import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.enums.DemandType;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.List;
 
 public class DemandDto {
 
-
+    ZonedDateTime now=ZonedDateTime.now(ZoneId.of("UTC"));
 
     private LocalDateTime startDate;
 
@@ -16,6 +20,16 @@ public class DemandDto {
     private Integer totalVacationTime;
 
     private DemandType demandType;
+
+    private MemberEntity member;
+
+    public MemberEntity getMember() {
+        return member;
+    }
+
+    public void setMember(MemberEntity member) {
+        this.member = member;
+    }
 
     public DemandType getDemandType() {
         return demandType;

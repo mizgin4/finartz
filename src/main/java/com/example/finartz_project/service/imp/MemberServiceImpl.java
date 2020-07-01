@@ -26,6 +26,8 @@ class MemberServiceImpl implements MemberService {
     Random random=new Random();
 
 
+
+
     @Override
     public SignUpResponse createMember(CreateMemberRequest request) throws Exception {
         Optional<MemberEntity> optionalMember = memberRepository.getMembetByEmail(request.getEmail());
@@ -35,8 +37,18 @@ class MemberServiceImpl implements MemberService {
         MemberDto memberDto = CreateMemberRequestConverter.convert(request);
         memberRepository.save(MemberConverter.convert(memberDto));
 
-        //
-        return SignUpResponse.getResponse(memberDto);
+        return getResponse(memberDto);
+
+    }
+
+    public static SignUpResponse getResponse(MemberDto memberDto) {
+        SignUpResponse response = new SignUpResponse();
+        //response.setMemberId(memberDto.getMemberId());
+        response.setBirthDay(memberDto.getBirthDay());
+        response.setName(memberDto.getName());
+        response.setLastName(memberDto.getLastName());
+        response.getEmail(memberDto.getEmail());
+        return response;
 
     }
 

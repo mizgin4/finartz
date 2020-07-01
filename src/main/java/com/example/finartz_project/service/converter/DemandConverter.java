@@ -11,6 +11,7 @@ public class DemandConverter {
         demandEntity.setEndDate(demandDto.getEndDate());
         demandEntity.setTotalVacationTime(demandDto.getTotalVacationTime());
         demandEntity.setDemandType(demandDto.getDemandType());
+        demandEntity.setMember(demandDto.getMember());
         return demandEntity;
     }
 }

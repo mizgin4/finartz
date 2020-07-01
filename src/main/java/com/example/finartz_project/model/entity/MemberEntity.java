@@ -3,6 +3,7 @@ package com.example.finartz_project.model.entity;
 import javax.management.relation.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +16,7 @@ public class MemberEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long memberId;
 
-
+    //@Column(name = "member",insertable = false,unique = true)
     private String name;
 
     private String lastName;
@@ -26,8 +27,12 @@ public class MemberEntity {
 
     private String password;
 
-    @OneToMany(mappedBy = "memberEntitySql")
+
+
+    @OneToMany(mappedBy = "member")
     private List<DemandEntity> demandEntity;
+
+
 
     @ManyToMany
     @JoinTable(

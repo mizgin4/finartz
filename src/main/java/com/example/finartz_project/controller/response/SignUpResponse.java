@@ -1,25 +1,17 @@
 package com.example.finartz_project.controller.response;
 
 import com.example.finartz_project.model.dto.MemberDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.time.LocalDateTime;
 
 public class SignUpResponse {
-    public static SignUpResponse getResponse(MemberDto memberDto) {
-        SignUpResponse response = new SignUpResponse();
-        response.setMemberId(memberDto.getMemberId());
-        response.setBirthDay(memberDto.getBirthDay());
-        response.setName(memberDto.getName());
-        response.setLastName(memberDto.getLastName());
-        response.getEmail(memberDto.getEmail());
-        return response;
-
-    }
-
-    private Long memberId;
+    //private Long memberId;
     private String name;
     private String lastName;
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
     private LocalDateTime birthDay;
     private String email;
     private String password;
@@ -36,13 +28,13 @@ public class SignUpResponse {
         this.password = password;
     }
 
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
+//    public Long getMemberId() {
+//        return memberId;
+//    }
+//
+//    public void setMemberId(Long memberId) {
+//        this.memberId = memberId;
+//    }
 
     public String getName() {
         return name;

@@ -2,21 +2,22 @@ package com.example.finartz_project.controller.response;
 
 import com.example.finartz_project.model.dto.DemandDto;
 import com.example.finartz_project.model.enums.DemandType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
 
 public class DemandResponse {
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDateTime startDate;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDateTime endDate;
 
-        private LocalDateTime startDate;
-
-        private LocalDateTime endDate;
-
-        private Integer totalVacationTime;
-        private DemandType demandType;
+    private Integer totalVacationTime;
+    private DemandType demandType;
 
 
-        public DemandType getDemandType() {
+    public DemandType getDemandType() {
         return demandType;
     }
 
@@ -48,17 +49,5 @@ public class DemandResponse {
         this.totalVacationTime = totalVacationTime;
     }
 
-
-    public static DemandResponse getResponse(DemandDto demandDto) {
-        DemandResponse response = new DemandResponse();
-        response.setStartDate(demandDto.getStartDate());
-        response.setEndDate(demandDto.getEndDate());
-        response.setTotalVacationTime(demandDto.getTotalVacationTime());
-        response.setDemandType(demandDto.getDemandType());
-
-
-
-        return response;
-    }
 }
 
