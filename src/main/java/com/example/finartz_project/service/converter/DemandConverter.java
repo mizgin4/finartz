@@ -9,7 +9,7 @@ public class DemandConverter {
         DemandEntity demandEntity =new DemandEntity();
         demandEntity.setStartDate(demandDto.getStartDate());
         demandEntity.setEndDate(demandDto.getEndDate());
-        demandEntity.setTotalVacationTime(demandDto.getTotalVacationTime());
+        demandEntity.setTotalDemandTime(demandDto.getTotalVacationTime());
         demandEntity.setDemandType(demandDto.getDemandType());
         demandEntity.setMember(demandDto.getMember());
         return demandEntity;

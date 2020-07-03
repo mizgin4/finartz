@@ -12,18 +12,20 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private MailService mailService;
 
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    MemberServiceImpl(MemberRepository memberRepository, MailService mailService) {
         this.memberRepository = memberRepository;
-
+        this.mailService = mailService;
     }
-    Random random=new Random();
+
+
+    //Random random=new Random();
 
 
 
@@ -34,8 +36,10 @@ class MemberServiceImpl implements MemberService {
         if (optionalMember.isPresent()) {
             throw new Exception("Member already exist");
         }
+
         MemberDto memberDto = CreateMemberRequestConverter.convert(request);
         memberRepository.save(MemberConverter.convert(memberDto));
+        //mailService.sendNotification(request);
 
         return getResponse(memberDto);
 

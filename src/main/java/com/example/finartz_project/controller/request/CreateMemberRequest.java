@@ -1,18 +1,27 @@
 package com.example.finartz_project.controller.request;
 
+import com.example.finartz_project.service.imp.MailService;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
+import javax.validation.constraints.Email;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 
 public class CreateMemberRequest {
 
     private String name;
     private String lastName;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
+    @Email
     private String email;
-    private String password;
+    @JsonIgnore
+    //private String password =generatePassword();
 
     public String getName() {
         return name;
@@ -47,11 +56,14 @@ public class CreateMemberRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
+
 }

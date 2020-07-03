@@ -2,10 +2,14 @@ package com.example.finartz_project.controller.response;
 
 import com.example.finartz_project.model.dto.MemberDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 
 import java.time.LocalDateTime;
+import java.util.Properties;
 
 public class SignUpResponse {
     //private Long memberId;
@@ -14,19 +18,19 @@ public class SignUpResponse {
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private LocalDateTime birthDay;
     private String email;
-    private String password;
+    //private String password;
 
     public String getEmail() {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
 //    public Long getMemberId() {
 //        return memberId;
