@@ -1,15 +1,20 @@
 package com.example.finartz_project.service;
 
 import com.example.finartz_project.controller.request.CreateDemandRequest;
-import com.example.finartz_project.controller.request.CreateMemberRequest;
 import com.example.finartz_project.controller.response.DemandResponse;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import com.example.finartz_project.model.dto.DemandDto;
+import com.example.finartz_project.model.entity.DemandEntity;
 
+import java.util.List;
 
 public interface DemandService {
-    DemandResponse vacationRequest(CreateDemandRequest request);
 
-    DemandResponse findDemandByMember(String member);
+    DemandResponse createDemand(CreateDemandRequest request);
+    //List<DemandDto> getDemandsbyMemberId(Long memberId);
+
+
+
+
 
 
 }

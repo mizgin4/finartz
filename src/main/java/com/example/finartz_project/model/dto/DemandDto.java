@@ -1,42 +1,23 @@
 package com.example.finartz_project.model.dto;
 
-
-import com.example.finartz_project.model.entity.MemberEntity;
-import com.example.finartz_project.model.enums.DemandType;
+import com.example.finartz_project.model.enumeration.DemandType;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.List;
 
 public class DemandDto {
 
-    ZonedDateTime now=ZonedDateTime.now(ZoneId.of("UTC"));
-
+    private Long memberId;
     private LocalDateTime startDate;
-
     private LocalDateTime endDate;
-
-    private Integer totalVacationTime;
-
+    private Integer totalDemandTime;
     private DemandType demandType;
 
-    private MemberEntity member;
-
-    public MemberEntity getMember() {
-        return member;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setMember(MemberEntity member) {
-        this.member = member;
-    }
-
-    public DemandType getDemandType() {
-        return demandType;
-    }
-
-    public void setDemandType(DemandType demandType) {
-        this.demandType = demandType;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public LocalDateTime getStartDate() {
@@ -55,11 +36,20 @@ public class DemandDto {
         this.endDate = endDate;
     }
 
-    public Integer getTotalVacationTime() {
-        return totalVacationTime;
+    public Integer getTotalDemandTime() {
+        return totalDemandTime;
     }
 
-    public void setTotalVacationTime(Integer totalVacationTime) {
-        this.totalVacationTime = totalVacationTime;
+    public void setTotalDemandTime(Integer totalDemandTime) {
+        this.totalDemandTime = totalDemandTime;
+    }
+
+    public DemandType getDemandType() {
+        return demandType;
+    }
+
+    public void setDemandType(DemandType demandType) {
+        this.demandType = demandType;
     }
 }
+//joda.DateTime

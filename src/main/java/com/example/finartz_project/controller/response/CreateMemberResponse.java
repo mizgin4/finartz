@@ -1,21 +1,19 @@
-package com.example.finartz_project.model.dto;
+package com.example.finartz_project.controller.response;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
-import java.util.List;
 
-public class MemberDto {
+public class CreateMemberResponse {
 
     private Long memberId;
     private String name;
     private String lastName;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
+    @Email
     private String email;
-    private String password;
-    private List<DemandDto> demands;
-    private List<RoleDto> roles;
 
     public Long getMemberId() {
         return memberId;
@@ -55,29 +53,5 @@ public class MemberDto {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<DemandDto> getDemands() {
-        return demands;
-    }
-
-    public void setDemands(List<DemandDto> demands) {
-        this.demands = demands;
-    }
-
-    public List<RoleDto> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<RoleDto> roles) {
-        this.roles = roles;
     }
 }

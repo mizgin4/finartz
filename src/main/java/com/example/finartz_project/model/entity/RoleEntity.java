@@ -14,26 +14,35 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROLE_ID")
     private Long roleId;
+
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID", nullable = false)
     @ManyToOne(targetEntity = MemberEntity.class)
     private MemberEntity member;
+
     @Column(name = "TITLE")
     private String title;
+
+
     public Long getRoleId() {
         return roleId;
     }
+
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
     public MemberEntity getMember() {
         return member;
     }
+
     public void setMember(MemberEntity member) {
         this.member = member;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }

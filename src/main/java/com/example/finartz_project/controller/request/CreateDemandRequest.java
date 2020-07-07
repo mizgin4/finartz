@@ -1,51 +1,31 @@
 package com.example.finartz_project.controller.request;
 
-import com.example.finartz_project.model.entity.MemberEntity;
-import com.example.finartz_project.model.enums.DemandType;
+import com.example.finartz_project.model.enumeration.DemandType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-
-
 public class CreateDemandRequest {
-    //private Long vacationId;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @NotNull
+    private Long memberId;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startDate;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
+
     private DemandType demandType;
-    private MemberEntity member;
 
-
-    public MemberEntity getMember() {
-        return member;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setMember(MemberEntity member) {
-        this.member = member;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
-
-    public DemandType getDemandType() {
-        return demandType;
-    }
-
-    public void setDemandType(DemandType demandType) {
-        this.demandType = demandType;
-    }
-
-
-
-
-//    public Long getVacationId() {
-//        return vacationId;
-//    }
-//
-//    public void setVacationId(Long vacationId) {
-//        this.vacationId = vacationId;
-//    }
 
     public LocalDateTime getStartDate() {
         return startDate;
@@ -63,6 +43,11 @@ public class CreateDemandRequest {
         this.endDate = endDate;
     }
 
+    public DemandType getDemandType() {
+        return demandType;
+    }
 
-
+    public void setDemandType(DemandType demandType) {
+        this.demandType = demandType;
+    }
 }
