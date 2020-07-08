@@ -10,12 +10,10 @@ import com.example.finartz_project.repository.MemberRepository;
 import com.example.finartz_project.service.DemandService;
 import com.example.finartz_project.service.converter.DemandEntityConverter;
 import com.example.finartz_project.service.converter.DemandRequestConverter;
+import com.example.finartz_project.service.converter.GetDemandsConverter;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,16 +22,20 @@ class DemandServiceImpl implements DemandService {
     private final DemandRequestConverter demandRequestConverter;
     private final DemandEntityConverter demandEntityConverter;
     private final MemberRepository memberRepository;
+    private final GetDemandsConverter getDemandsConverter;
 
     public DemandServiceImpl(DemandRepository demandRepository,
                              DemandRequestConverter demandRequestConverter,
                              DemandEntityConverter demandEntityConverter,
-                             MemberRepository memberRepository) {
+                             MemberRepository memberRepository,
+                             GetDemandsConverter getDemandsConverter) {
         this.demandRepository = demandRepository;
         this.demandRequestConverter = demandRequestConverter;
         this.demandEntityConverter = demandEntityConverter;
         this.memberRepository = memberRepository;
+        this.getDemandsConverter = getDemandsConverter;
     }
+
 
     @Override
     public DemandResponse createDemand(CreateDemandRequest request) {
@@ -53,50 +55,30 @@ class DemandServiceImpl implements DemandService {
         demandRepository.save(demandEntity);
 
         return getResponse(demandDto, demandEntity);
+
     }
 
-//umit ve fatihle yapialn kisim
-//    @Override
-//    public List<DemandDto> getDemandsbyMemberId(Long memberId) {
-//        Optional<MemberEntity> memberEntity= memberRepository.findById(memberId);
-//        if(memberEntity.isPresent()){
-//            if(CollectionUtils.isEmpty(memberEntity.get().getDemands())) {
-//
-//            }
-//        }
-//        List<DemandEntity> demands = memberEntity.get().getDemands();
-//
-//
-//        return convert(demandEntity);
-//    }
 
-//    private List<DemandDto> convert(List<DemandEntity> source){
-//      return source.stream()
-//              .map(this::convert)
-//              .collect(Collectors.toList());
-//
-//    }
+    @Override
+    public List<DemandDto> getDemandsbyMemberId(Long memberId) {
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        List<DemandEntity> demandEntity= demandRepository.findByMember(memberEntity);
+        return demandEntity.stream().filter(Objects::nonNull).map(this::convert).collect(Collectors.toList());
 
-//    @Override
-//    public List<DemandEntity> findDemandByMemberId(Long memberId) {
-//        Optional<MemberEntity> memberEntity=memberRepository.findById(memberId);
-//        List<DemandEntity> demands = demandRepository.findByMember(memberEntity);
-//        return demands;
-//
-//    }
+    }
+    private DemandDto convert(DemandEntity source) {
+        if (source == null) {
+            return null;
+        }
+        DemandDto target = new DemandDto();
+        target.setMemberId(source.getMember().getMemberId());
+        target.setStartDate(source.getStartDate());
+        target.setEndDate(source.getEndDate());
+        target.setTotalDemandTime(source.getTotalDemandTime());
+        target.setDemandType(source.getDemandType());
+        return target;
+    }
 
-
-    //demand entity'den memberId'ye ilişkin demand listesini getirmen
-    // BURA DUZENLENIP YAZILACA
-
-
-
-
-
-//    private DemandResponse getResponseMemberId(DemandEntity demandEntity){
-//        DemandResponse demandResponse=new DemandResponse();
-//        List<DemandResponse> demandResponses=demandRepository.findByMember(mem)
-//    }
 
     private DemandResponse getResponse(DemandDto demandDto, DemandEntity demandEntity) {
 

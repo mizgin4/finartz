@@ -3,24 +3,25 @@ package com.example.finartz_project.controller.request;
 import com.example.finartz_project.model.dto.RoleDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.management.relation.RoleList;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class CreateMemberRequest {
 
-
-
     private String name;
+
     private String lastName;
+
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
+
     @Email
     private String email;
 
-
     private List<RoleDto> roleList;
+
+
 
     public String getName() {
         return name;

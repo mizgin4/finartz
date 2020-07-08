@@ -1,6 +1,7 @@
 package com.example.finartz_project.service.impl;
 
 import com.example.finartz_project.controller.request.CreateMemberRequest;
+import com.example.finartz_project.controller.request.SignInRequest;
 import com.example.finartz_project.controller.request.UpdatePasswordReqeust;
 import com.example.finartz_project.controller.response.CreateMemberResponse;
 import com.example.finartz_project.controller.response.UpdatePasswordResponse;
@@ -48,6 +49,7 @@ class MemberServiceImpl implements MemberService {
         MemberEntity memberEntity = memberEntityConverter.convert(memberDto);
 
         memberRepository.save(memberEntity);
+        memberDto.setMemberId(memberEntity.getMemberId());
         //For sending passwords via mails.Works but closed for dev. purposes
         //mailService.sendNotification(request);
 
@@ -62,6 +64,22 @@ class MemberServiceImpl implements MemberService {
         return updateResponse(memberEntity);
 
     }
+
+    @Override
+    public String signIn(SignInRequest request)   {
+        Optional<MemberEntity> optionalMemberEntity=memberRepository.getMemberByEmail(request.getEmail());
+
+        if(optionalMemberEntity.isPresent()){
+            MemberEntity member = memberRepository.getMemberEntityByEmail(request.getEmail());
+            if (member.getPassword().equals(request.getPassword()) && member.getEmail().equals(request.getEmail())) {
+                return "Succesfully signed in";
+            }
+        }
+
+        return "User not found";
+    }
+
+
 
     private UpdatePasswordResponse updateResponse(MemberEntity memberEntity) {
         UpdatePasswordResponse response = new UpdatePasswordResponse();

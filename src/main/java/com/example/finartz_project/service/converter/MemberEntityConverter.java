@@ -2,10 +2,8 @@ package com.example.finartz_project.service.converter;
 
 import com.example.finartz_project.model.dto.DemandDto;
 import com.example.finartz_project.model.dto.MemberDto;
-import com.example.finartz_project.model.dto.RoleDto;
 import com.example.finartz_project.model.entity.DemandEntity;
 import com.example.finartz_project.model.entity.MemberEntity;
-import com.example.finartz_project.model.entity.RoleEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -28,7 +26,7 @@ public class MemberEntityConverter {
         memberEntity.setBirthDay(source.getBirthDay());
         memberEntity.setEmail(source.getEmail());
         memberEntity.setPassword(source.getPassword());
-        //memberEntity.setRoles(source.getRoles());
+        memberEntity.setRoles(source.getRoles());
 
         if (!CollectionUtils.isEmpty(source.getDemands())){
             memberEntity.setDemands(getDemands(source.getDemands(), memberEntity));

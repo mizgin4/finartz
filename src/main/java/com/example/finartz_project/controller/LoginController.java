@@ -1,7 +1,6 @@
 package com.example.finartz_project.controller;
 
 import com.example.finartz_project.controller.request.SignInRequest;
-import com.example.finartz_project.controller.response.SignInResponse;
 import com.example.finartz_project.service.MemberService;
 import com.example.finartz_project.service.internal.impl.MailServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +23,18 @@ public class LoginController {
     }
 
 
-    //bu burada kalsın
-    @PostMapping("/signin")
-    public ResponseEntity<SignInResponse> memberSignIn(@RequestBody SignInRequest request) {
-        return null;
+    @PostMapping("/signedin")
+    public ResponseEntity<String> memberSignIn(@RequestBody SignInRequest request) {
+        return ResponseEntity.ok(memberService.signIn(request));
     }
 }
+
+//    @PostMapping("/permit")
+//    public String permit(){
+//        return "Permitted";
+//    }
+
+
 
 
 //    //adminUpdating'e taşı

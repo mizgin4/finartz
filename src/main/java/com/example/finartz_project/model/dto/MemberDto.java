@@ -1,5 +1,6 @@
 package com.example.finartz_project.model.dto;
 
+import com.example.finartz_project.model.entity.RoleEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ public class MemberDto {
     private String email;
     private String password;
     private List<DemandDto> demands;
-    private List<RoleDto> roles;
+    private List<RoleEntity> roles;
 
     public Long getMemberId() {
         return memberId;
@@ -73,11 +74,11 @@ public class MemberDto {
         this.demands = demands;
     }
 
-    public List<RoleDto> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleDto> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
     }
 }

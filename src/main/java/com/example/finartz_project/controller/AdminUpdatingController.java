@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 
 @RestController
+
 @RequestMapping("/auth")
 public class AdminUpdatingController {
     private final MemberService memberService;
@@ -26,7 +27,7 @@ public class AdminUpdatingController {
 
 
     //@PostMapping(value = AdminControllerEndpoint.CREATE_DEMAND)
-    @PostMapping("/createmember")
+    @PostMapping("/createmember") //sneaky code
     public ResponseEntity<CreateMemberResponse> createMember(
             @Valid @RequestBody CreateMemberRequest request)
             throws Exception {
