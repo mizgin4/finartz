@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/memberdemands")
+@RequestMapping(path = "/memberdemands")
 public class MemberLoadingController {
     private final DemandService demandService;
     private final DemandRepository demandRepository;

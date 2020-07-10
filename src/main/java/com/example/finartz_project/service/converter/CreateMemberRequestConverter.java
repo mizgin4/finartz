@@ -16,7 +16,7 @@ public class CreateMemberRequestConverter {
         memberDto.setLastName(request.getLastName());
         memberDto.setEmail(request.getEmail());
         memberDto.setPassword(password);
-        //memberDto.setRoles(request.getRoleList());
+        memberDto.setRoles(request.getRoleList());
 
         return memberDto;
     }

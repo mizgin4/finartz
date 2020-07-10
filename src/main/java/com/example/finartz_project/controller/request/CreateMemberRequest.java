@@ -1,6 +1,7 @@
 package com.example.finartz_project.controller.request;
 
 import com.example.finartz_project.model.dto.RoleDto;
+import com.example.finartz_project.model.entity.RoleEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.Email;
@@ -19,7 +20,7 @@ public class CreateMemberRequest {
     @Email
     private String email;
 
-    private List<RoleDto> roleList;
+    private List<RoleEntity> roleList;
 
 
 
@@ -56,11 +57,11 @@ public class CreateMemberRequest {
         this.email = email;
     }
 
-    public List<RoleDto> getRoleList() {
+    public List<RoleEntity> getRoleList() {
         return roleList;
     }
 
-    public void setRoleList(List<RoleDto> roleList) {
+    public void setRoleList(List<RoleEntity> roleList) {
         this.roleList = roleList;
     }
 }
