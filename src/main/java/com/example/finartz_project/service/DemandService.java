@@ -10,6 +10,7 @@ public interface DemandService {
 
     DemandResponse createDemand(CreateDemandRequest request);
     List<DemandDto> getDemandsbyMemberId(Long memberId);
+    List<DemandDto> getAllDemands();
 
 
 

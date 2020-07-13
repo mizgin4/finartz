@@ -5,7 +5,7 @@ import com.example.finartz_project.model.entity.MemberEntity;
 public class AddRoleRequest {
     private Long memberId;
     private String title;
-    private MemberEntity memberEntity;
+
 
     public String getTitle() {
         return title;
@@ -13,14 +13,6 @@ public class AddRoleRequest {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public MemberEntity getMemberEntity() {
-        return memberEntity;
-    }
-
-    public void setMemberEntity(MemberEntity memberEntity) {
-        this.memberEntity = memberEntity;
     }
 
     public Long getMemberId() {

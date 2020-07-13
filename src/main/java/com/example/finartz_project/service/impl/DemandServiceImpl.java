@@ -66,19 +66,12 @@ class DemandServiceImpl implements DemandService {
         return demandEntity.stream().filter(Objects::nonNull).map(this::convert).collect(Collectors.toList());
 
     }
-    private DemandDto convert(DemandEntity source) {
-        if (source == null) {
-            return null;
-        }
-        DemandDto target = new DemandDto();
-        target.setMemberId(source.getMember().getMemberId());
-        target.setStartDate(source.getStartDate());
-        target.setEndDate(source.getEndDate());
-        target.setTotalDemandTime(source.getTotalDemandTime());
-        target.setDemandType(source.getDemandType());
-        return target;
-    }
 
+    @Override
+    public List<DemandDto> getAllDemands() {
+        List<DemandEntity> demands= demandRepository.findAll();
+        return converted(demands);
+    }
 
     private DemandResponse getResponse(DemandDto demandDto, DemandEntity demandEntity) {
 
@@ -92,6 +85,28 @@ class DemandServiceImpl implements DemandService {
 
         return response;
     }
+
+
+    public List<DemandDto> converted(List<DemandEntity> source) {
+
+        return source.stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
+    private DemandDto convert(DemandEntity source) {
+        if (source == null) {
+            return null;
+        }
+        DemandDto target = new DemandDto();
+        target.setMemberId(source.getMember().getMemberId());
+        target.setStartDate(source.getStartDate());
+        target.setEndDate(source.getEndDate());
+        target.setTotalDemandTime(source.getTotalDemandTime());
+        target.setDemandType(source.getDemandType());
+        return target;
+    }
+
 }
 
 

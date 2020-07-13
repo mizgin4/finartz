@@ -11,6 +11,7 @@ public class RoleEntityConverter {
 
     public RoleEntity convert(RoleDto roleDto, MemberEntity memberEntity){
         RoleEntity roleEntity=new RoleEntity();
+
         roleEntity.setTitle(roleDto.getTitle());
         roleEntity.setMember(memberEntity);
         return roleEntity;

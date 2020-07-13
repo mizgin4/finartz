@@ -33,12 +33,15 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public AddRoleResponse addRole(AddRoleRequest request) {
+
         RoleDto roleDto= roleRequestConverter.convert(request);
+
         Optional<MemberEntity> optionalMemberEntity=memberRepository.findById(request.getMemberId());
+
         if(!optionalMemberEntity.isPresent()){
             throw new NullPointerException("Member is not found");
         }
-        MemberEntity memberEntity=new MemberEntity();
+        MemberEntity memberEntity = optionalMemberEntity.get();
         RoleEntity roleEntity=roleEntityConverter.convert(roleDto,memberEntity);
         roleRepository.save(roleEntity);
 

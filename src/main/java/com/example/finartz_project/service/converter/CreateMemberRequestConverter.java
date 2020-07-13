@@ -18,6 +18,7 @@ public class CreateMemberRequestConverter {
         memberDto.setPassword(password);
         memberDto.setRoles(request.getRoleList());
 
+
         return memberDto;
     }
 }

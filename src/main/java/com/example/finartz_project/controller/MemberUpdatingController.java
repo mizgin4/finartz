@@ -46,9 +46,9 @@ public class MemberUpdatingController {
         return ResponseEntity.ok(memberService.updatePassword(request,id));
     }
 
-    @PostMapping("/addRole")
+    @PutMapping("/addRole")
     public ResponseEntity<AddRoleResponse> addRole(@RequestBody AddRoleRequest request){
-        return ResponseEntity.ok(roleService.addRole(request));
+        return ResponseEntity.ok(roleService.addRole(request)) ;
     }
 
 

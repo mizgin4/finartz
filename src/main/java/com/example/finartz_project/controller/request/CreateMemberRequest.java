@@ -24,6 +24,7 @@ public class CreateMemberRequest {
 
 
 
+
     public String getName() {
         return name;
     }

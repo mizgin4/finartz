@@ -29,6 +29,11 @@ public class MemberLoadingController {
         return ResponseEntity.ok(demandService.getDemandsbyMemberId(memberId));
     }
 
+    @GetMapping("/alldemands")
+    public ResponseEntity<List<DemandDto>> getallDemands(){
+        return ResponseEntity.ok(demandService.getAllDemands());
+    }
+
 
 
 }
