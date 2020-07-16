@@ -20,6 +20,7 @@ public class DemandEntityConverter {
         demandEntity.setStartDate(demandDto.getStartDate());
         demandEntity.setEndDate(demandDto.getEndDate());
         demandEntity.setTotalDemandTime(demandDto.getTotalDemandTime());
+        demandEntity.setStatus(demandDto.getStatus());
 
         return demandEntity;
     }

@@ -41,6 +41,7 @@ public class RoleServiceImpl implements RoleService {
         if(!optionalMemberEntity.isPresent()){
             throw new NullPointerException("Member is not found");
         }
+
         MemberEntity memberEntity = optionalMemberEntity.get();
         RoleEntity roleEntity=roleEntityConverter.convert(roleDto,memberEntity);
         roleRepository.save(roleEntity);

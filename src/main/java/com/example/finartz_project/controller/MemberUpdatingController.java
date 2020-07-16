@@ -24,7 +24,6 @@ public class MemberUpdatingController {
     public MemberUpdatingController(MemberService memberService, DemandService demandService, RoleService roleService) {
         this.memberService = memberService;
         this.demandService = demandService;
-
         this.roleService = roleService;
     }
 
@@ -32,7 +31,7 @@ public class MemberUpdatingController {
     @PostMapping("/demandrequest")
     public ResponseEntity<DemandResponse> createDemand(@RequestBody CreateDemandRequest request) {
         //return ResponseEntity.ok(demandService.createDemand(request));
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(demandService.createDemand(request));
+        return ResponseEntity.ok(demandService.createDemand(request));
 
 
     }
@@ -46,7 +45,7 @@ public class MemberUpdatingController {
         return ResponseEntity.ok(memberService.updatePassword(request,id));
     }
 
-    @PutMapping("/addRole")
+    @PostMapping("/addRole")
     public ResponseEntity<AddRoleResponse> addRole(@RequestBody AddRoleRequest request){
         return ResponseEntity.ok(roleService.addRole(request)) ;
     }

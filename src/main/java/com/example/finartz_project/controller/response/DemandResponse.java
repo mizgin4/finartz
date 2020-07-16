@@ -1,6 +1,7 @@
 package com.example.finartz_project.controller.response;
 
 import com.example.finartz_project.model.enumeration.DemandType;
+import com.example.finartz_project.model.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,8 @@ public class DemandResponse {
     private Integer totalDemandTime;
 
     private DemandType demandType;
+
+    private Status status;
 
     public Long getDemandId() {
         return demandId;
@@ -60,5 +63,12 @@ public class DemandResponse {
         this.totalDemandTime = totalDemandTime;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
 

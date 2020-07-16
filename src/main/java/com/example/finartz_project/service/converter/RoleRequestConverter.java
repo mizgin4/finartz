@@ -9,9 +9,12 @@ import javax.management.relation.Role;
 public class RoleRequestConverter {
 
     public RoleDto convert(AddRoleRequest request){
+
         RoleDto roleDto=new RoleDto();
+
         roleDto.setTitle(request.getTitle());
         roleDto.setMemberId(request.getMemberId());
+
         return roleDto;
     }
 }

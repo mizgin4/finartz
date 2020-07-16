@@ -1,6 +1,7 @@
 package com.example.finartz_project.model.dto;
 
 import com.example.finartz_project.model.enumeration.DemandType;
+import com.example.finartz_project.model.enumeration.Status;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +12,7 @@ public class DemandDto {
     private LocalDateTime endDate;
     private Integer totalDemandTime;
     private DemandType demandType;
+    private Status status;
 
     public Long getMemberId() {
         return memberId;
@@ -50,6 +52,14 @@ public class DemandDto {
 
     public void setDemandType(DemandType demandType) {
         this.demandType = demandType;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 //joda.DateTime

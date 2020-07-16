@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "role")
 public class RoleEntity {
@@ -15,6 +17,7 @@ public class RoleEntity {
     @Column(name = "ROLE_ID")
     private Long roleId;
 
+    @NotNull
     @JoinColumn(name = "MEMBER_ID", referencedColumnName = "MEMBER_ID", nullable = false)
     @ManyToOne(targetEntity = MemberEntity.class)
     private MemberEntity member;

@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class MemberEntityConverter {
 
-    public MemberEntity convert(MemberDto source) {
+    public MemberEntity convert(MemberDto source, String password) {
 
         if (source == null) {
             return null;
@@ -29,6 +29,7 @@ public class MemberEntityConverter {
         memberEntity.setEmail(source.getEmail());
         memberEntity.setPassword(source.getPassword());
         memberEntity.setRoles(source.getRoles());
+        memberEntity.setPassword(password);
 
         if (!CollectionUtils.isEmpty(source.getDemands())){
             memberEntity.setDemands(getDemands(source.getDemands(), memberEntity));

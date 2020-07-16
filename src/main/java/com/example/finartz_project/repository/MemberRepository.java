@@ -14,6 +14,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity,Long> {
     Optional<MemberEntity> getMemberByEmail(String email);
     MemberEntity findByName(String name);
     MemberEntity getMemberEntityByEmail(String email);
+    MemberEntity findByMemberId(Long id);
 
 
 

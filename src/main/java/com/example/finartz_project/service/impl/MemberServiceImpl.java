@@ -43,10 +43,10 @@ class MemberServiceImpl implements MemberService {
         }
 
         String password = mailService.generatePassword();
+        //PASSWORD U MEMBER ENTITY E AL
+        MemberDto memberDto = createMemberRequestConverter.convert(request);
 
-        MemberDto memberDto = createMemberRequestConverter.convert(request, password);
-
-        MemberEntity memberEntity = memberEntityConverter.convert(memberDto);
+        MemberEntity memberEntity = memberEntityConverter.convert(memberDto,password);
 
         memberRepository.save(memberEntity);
         memberDto.setMemberId(memberEntity.getMemberId());
@@ -56,9 +56,10 @@ class MemberServiceImpl implements MemberService {
         return getResponse(memberDto);
     }
 
+    //FindByMemberId ile bagladim
     @Override
     public UpdatePasswordResponse updatePassword(UpdatePasswordReqeust reqeust,Long id) {
-        MemberEntity memberEntity= memberRepository.getOne(id);
+        MemberEntity memberEntity= memberRepository.findByMemberId(id);
         memberEntity.setPassword(reqeust.getPassword());
         memberRepository.save(memberEntity);
         return updateResponse(memberEntity);

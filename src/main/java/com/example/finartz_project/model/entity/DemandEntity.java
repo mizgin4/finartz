@@ -1,6 +1,7 @@
 package com.example.finartz_project.model.entity;
 
 import com.example.finartz_project.model.enumeration.DemandType;
+import com.example.finartz_project.model.enumeration.Status;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,10 @@ public class DemandEntity {
     @Column(name = "DEMAND_TYPE")
     @Enumerated(value = EnumType.STRING)
     private DemandType demandType;
+
+    @Column(name = "STATUS_TYPE")
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 
     public Long getDemandId() {
         return demandId;
@@ -79,5 +84,13 @@ public class DemandEntity {
 
     public void setDemandType(DemandType demandType) {
         this.demandType = demandType;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

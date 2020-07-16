@@ -1,5 +1,6 @@
 package com.example.finartz_project.controller.response;
 
+import com.example.finartz_project.model.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.Email;
@@ -14,6 +15,7 @@ public class CreateMemberResponse {
     private LocalDateTime birthDay;
     @Email
     private String email;
+    private Status status;
 
     public Long getMemberId() {
         return memberId;
@@ -53,5 +55,13 @@ public class CreateMemberResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

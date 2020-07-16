@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateMemberRequestConverter {
 
-    public MemberDto convert(CreateMemberRequest request, String password) {
+    public MemberDto convert(CreateMemberRequest request) {
 
         MemberDto memberDto = new MemberDto();
 
@@ -15,7 +15,7 @@ public class CreateMemberRequestConverter {
         memberDto.setName(request.getName());
         memberDto.setLastName(request.getLastName());
         memberDto.setEmail(request.getEmail());
-        memberDto.setPassword(password);
+        //memberDto.setPassword(password);
         memberDto.setRoles(request.getRoleList());
 
 

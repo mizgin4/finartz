@@ -82,6 +82,7 @@ class DemandServiceImpl implements DemandService {
         response.setEndDate(demandDto.getEndDate());
         response.setTotalDemandTime(demandDto.getTotalDemandTime());
         response.setDemandType(demandDto.getDemandType());
+        response.setStatus(demandDto.getStatus());
 
         return response;
     }
