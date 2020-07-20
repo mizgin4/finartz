@@ -11,6 +11,7 @@ import com.example.finartz_project.service.DemandService;
 import com.example.finartz_project.service.converter.DemandEntityConverter;
 import com.example.finartz_project.service.converter.DemandRequestConverter;
 import com.example.finartz_project.service.converter.GetDemandsConverter;
+import com.example.finartz_project.service.internal.MailService;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,17 +24,19 @@ class DemandServiceImpl implements DemandService {
     private final DemandEntityConverter demandEntityConverter;
     private final MemberRepository memberRepository;
     private final GetDemandsConverter getDemandsConverter;
+    private final MailService mailService;
 
     public DemandServiceImpl(DemandRepository demandRepository,
                              DemandRequestConverter demandRequestConverter,
                              DemandEntityConverter demandEntityConverter,
                              MemberRepository memberRepository,
-                             GetDemandsConverter getDemandsConverter) {
+                             GetDemandsConverter getDemandsConverter, MailService mailService) {
         this.demandRepository = demandRepository;
         this.demandRequestConverter = demandRequestConverter;
         this.demandEntityConverter = demandEntityConverter;
         this.memberRepository = memberRepository;
         this.getDemandsConverter = getDemandsConverter;
+        this.mailService = mailService;
     }
 
 
@@ -53,6 +56,8 @@ class DemandServiceImpl implements DemandService {
         DemandEntity demandEntity = demandEntityConverter.convert(demandDto, memberEntity);
 
         demandRepository.save(demandEntity);
+        //        For sending passwords via mails.Works but closed for dev. purposes
+        mailService.sendDemandNotification(request);
 
         return getResponse(demandDto, demandEntity);
 
@@ -83,6 +88,7 @@ class DemandServiceImpl implements DemandService {
         response.setTotalDemandTime(demandDto.getTotalDemandTime());
         response.setDemandType(demandDto.getDemandType());
         response.setStatus(demandDto.getStatus());
+
 
         return response;
     }
