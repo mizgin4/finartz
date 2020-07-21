@@ -4,9 +4,11 @@ import com.example.finartz_project.controller.request.CreateMemberRequest;
 import com.example.finartz_project.controller.request.SignInRequest;
 import com.example.finartz_project.controller.request.UpdatePasswordReqeust;
 import com.example.finartz_project.controller.response.CreateMemberResponse;
+import com.example.finartz_project.controller.response.MemberDeleteResponse;
 import com.example.finartz_project.controller.response.UpdatePasswordResponse;
 import com.example.finartz_project.model.dto.MemberDto;
 import com.example.finartz_project.model.entity.MemberEntity;
+import com.example.finartz_project.model.enumeration.MemberStatus;
 import com.example.finartz_project.repository.MemberRepository;
 import com.example.finartz_project.service.MemberService;
 import com.example.finartz_project.service.converter.CreateMemberRequestConverter;
@@ -80,6 +82,12 @@ class MemberServiceImpl implements MemberService {
         return "User not found";
     }
 
+    @Override
+    public MemberDeleteResponse deleteMember(Long id) {
+        MemberEntity memberEntity=memberRepository.findByMemberId(id);
+        memberEntity.setIsdeleted(MemberStatus.PASSIVE);
+        return null;
+    }
 
 
     private UpdatePasswordResponse updateResponse(MemberEntity memberEntity) {

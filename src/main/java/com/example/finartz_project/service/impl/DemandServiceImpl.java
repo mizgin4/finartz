@@ -56,8 +56,8 @@ class DemandServiceImpl implements DemandService {
         DemandEntity demandEntity = demandEntityConverter.convert(demandDto, memberEntity);
 
         demandRepository.save(demandEntity);
-        //        For sending passwords via mails.Works but closed for dev. purposes
-        mailService.sendDemandNotification(request);
+        //       For sending demand notifications for supervisors
+        //mailService.sendDemandNotification(demandDto);
 
         return getResponse(demandDto, demandEntity);
 

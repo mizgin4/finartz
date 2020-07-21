@@ -1,6 +1,10 @@
 package com.example.finartz_project.model.entity;
 
+import com.example.finartz_project.model.enumeration.MemberStatus;
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
+import javax.ws.rs.DefaultValue;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +31,10 @@ public class MemberEntity {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "IS_DELETED")
+    @Enumerated(value = EnumType.STRING)
+    private MemberStatus isdeleted=MemberStatus.ACTIVE;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DemandEntity> demands;
@@ -96,5 +104,13 @@ public class MemberEntity {
 
     public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public MemberStatus getIsdeleted() {
+        return isdeleted;
+    }
+
+    public void setIsdeleted(MemberStatus isdeleted) {
+        this.isdeleted = isdeleted;
     }
 }

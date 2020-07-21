@@ -2,6 +2,8 @@ package com.example.finartz_project.service.internal.impl;
 
 import com.example.finartz_project.controller.request.CreateDemandRequest;
 import com.example.finartz_project.controller.request.CreateMemberRequest;
+import com.example.finartz_project.model.dto.DemandDto;
+import com.example.finartz_project.model.dto.MemberDto;
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.entity.RoleEntity;
 import com.example.finartz_project.repository.MemberRepository;
@@ -43,21 +45,31 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendDemandNotification(CreateDemandRequest request) throws MailException {
+    public void sendDemandNotification(DemandDto demandDto) throws MailException {
 
         Hashtable<String, String> my_dict = new Hashtable<String, String>();
-        my_dict.put("USER","ADMIN");
+        my_dict.put("USER", "ADMIN");
 
 
-        Optional<RoleEntity> roleEntity=roleRepository.findById(request.getMemberId());
-        MemberEntity memberEntity= memberRepository.findByRoles(roleEntity.get().getTitle());
+        RoleEntity roleEntity = roleRepository.findByMember_MemberId(demandDto.getMemberId());//Burda elimde request gonderenin rolu var
+        switch (roleEntity.getTitle()) {
+            case "USER":
+                RoleEntity roleEntity1 = roleRepository.findByTitle("ADMIN");
+                MemberEntity memberEntity = memberRepository.findByMemberId(roleEntity1.getMember().getMemberId());
 
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
-        mailMessage.setTo(memberEntity.getEmail());
-        mailMessage.setSubject("New Demand Requested");
-        mailMessage.setText("This happend");
-        javaMailSender.send(mailMessage);
+
+                SimpleMailMessage mailMessage = new SimpleMailMessage();
+                mailMessage.setTo(memberEntity.getEmail());
+                mailMessage.setSubject("New Demand Requested");
+                mailMessage.setText("Name:"+ memberEntity.getName()+memberEntity.getLastName());
+                javaMailSender.send(mailMessage);
+
+        }
+
     }
+
+
+
 
     public String generatePassword() {
 

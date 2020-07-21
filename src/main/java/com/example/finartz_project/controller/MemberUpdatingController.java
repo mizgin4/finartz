@@ -5,6 +5,7 @@ import com.example.finartz_project.controller.request.CreateDemandRequest;
 import com.example.finartz_project.controller.request.UpdatePasswordReqeust;
 import com.example.finartz_project.controller.response.AddRoleResponse;
 import com.example.finartz_project.controller.response.DemandResponse;
+import com.example.finartz_project.controller.response.MemberDeleteResponse;
 import com.example.finartz_project.controller.response.UpdatePasswordResponse;
 import com.example.finartz_project.service.DemandService;
 import com.example.finartz_project.service.MemberService;
@@ -48,6 +49,13 @@ public class MemberUpdatingController {
     @PostMapping("/addRole")
     public ResponseEntity<AddRoleResponse> addRole(@RequestBody AddRoleRequest request){
         return ResponseEntity.ok(roleService.addRole(request)) ;
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<MemberDeleteResponse> delete(@PathVariable("id") Long id){
+
+        return ResponseEntity.ok(memberService.deleteMember(id));
     }
 
 
