@@ -5,7 +5,7 @@ import com.example.finartz_project.model.dto.MemberDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CreateMemberRequestConverter {
+public class  CreateMemberRequestConverter {
 
     public MemberDto convert(CreateMemberRequest request) {
 

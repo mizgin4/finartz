@@ -2,7 +2,7 @@ package com.example.finartz_project.service.impl;
 
 import com.example.finartz_project.controller.request.CreateMemberRequest;
 import com.example.finartz_project.controller.request.SignInRequest;
-import com.example.finartz_project.controller.request.UpdatePasswordReqeust;
+import com.example.finartz_project.controller.request.UpdatePasswordRequest;
 import com.example.finartz_project.controller.response.CreateMemberResponse;
 import com.example.finartz_project.controller.response.MemberDeleteResponse;
 import com.example.finartz_project.controller.response.UpdatePasswordResponse;
@@ -60,11 +60,18 @@ class MemberServiceImpl implements MemberService {
 
     //FindByMemberId ile bagladim
     @Override
-    public UpdatePasswordResponse updatePassword(UpdatePasswordReqeust reqeust,Long id) {
-        MemberEntity memberEntity= memberRepository.findByMemberId(id);
-        memberEntity.setPassword(reqeust.getPassword());
-        memberRepository.save(memberEntity);
-        return updateResponse(memberEntity);
+    public UpdatePasswordResponse updatePassword(UpdatePasswordRequest request, Long id) throws Exception {
+        Optional<MemberEntity> memberEntity= Optional.ofNullable(memberRepository.findByMemberId(id));
+        if (memberEntity.isPresent()) {
+            if (request.getOldPassword().equals(memberEntity.get().getPassword()) && request.getName().equals(memberEntity.get().getName())) {
+                memberEntity.get().setPassword(request.getNewPassword());
+                memberRepository.save(memberEntity.get());
+                return updateResponse();
+            }else{
+                throw  new Exception("Username or password is not correct ");
+            }
+        }
+        throw  new Exception("member not exits");
 
     }
 
@@ -90,9 +97,10 @@ class MemberServiceImpl implements MemberService {
     }
 
 
-    private UpdatePasswordResponse updateResponse(MemberEntity memberEntity) {
+    private UpdatePasswordResponse updateResponse() {
         UpdatePasswordResponse response = new UpdatePasswordResponse();
-        response.setPassword(memberEntity.getPassword());
+        //response.setPassword(memberEntity.getPassword());
+        response.getMesg();
         return response;
 
     }

@@ -1,17 +1,18 @@
 package com.example.finartz_project.controller.request;
 
 import com.example.finartz_project.model.entity.MemberEntity;
+import com.example.finartz_project.model.enumeration.Roles;
 
 public class AddRoleRequest {
     private Long memberId;
-    private String title;
+    private Roles title;
 
 
-    public String getTitle() {
+    public Roles getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Roles title) {
         this.title = title;
     }
 

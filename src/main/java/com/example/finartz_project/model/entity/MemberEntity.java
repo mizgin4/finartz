@@ -1,10 +1,10 @@
 package com.example.finartz_project.model.entity;
 
 import com.example.finartz_project.model.enumeration.MemberStatus;
-import net.bytebuddy.implementation.bind.annotation.Default;
+
 
 import javax.persistence.*;
-import javax.ws.rs.DefaultValue;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

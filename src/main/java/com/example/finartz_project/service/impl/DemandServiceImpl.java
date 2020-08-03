@@ -1,10 +1,12 @@
 package com.example.finartz_project.service.impl;
 
 import com.example.finartz_project.controller.request.CreateDemandRequest;
+import com.example.finartz_project.controller.response.DemandApproveResponse;
 import com.example.finartz_project.controller.response.DemandResponse;
 import com.example.finartz_project.model.dto.DemandDto;
 import com.example.finartz_project.model.entity.DemandEntity;
 import com.example.finartz_project.model.entity.MemberEntity;
+import com.example.finartz_project.model.enumeration.Status;
 import com.example.finartz_project.repository.DemandRepository;
 import com.example.finartz_project.repository.MemberRepository;
 import com.example.finartz_project.service.DemandService;
@@ -78,6 +80,24 @@ class DemandServiceImpl implements DemandService {
         return converted(demands);
     }
 
+    @Override
+    public List<DemandDto> demandsForApproval() {
+        List<DemandEntity> demandEntities= demandRepository.findByStatus(Status.WAITINGFORAPPRROVAL);
+        return converting(demandEntities);
+    }
+
+    @Override//En son kadlgin yer aprrove edilen demandleri gorme servisi
+    public DemandApproveResponse demandApprove(Long memberid, Long demandid) {
+        return null;
+    }
+
+    public List<DemandDto> converting(List<DemandEntity> source) {
+
+        return source.stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
     private DemandResponse getResponse(DemandDto demandDto, DemandEntity demandEntity) {
 
         DemandResponse response = new DemandResponse();
@@ -111,6 +131,7 @@ class DemandServiceImpl implements DemandService {
         target.setEndDate(source.getEndDate());
         target.setTotalDemandTime(source.getTotalDemandTime());
         target.setDemandType(source.getDemandType());
+        target.setStatus(source.getStatus());
         return target;
     }
 

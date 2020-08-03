@@ -2,6 +2,7 @@ package com.example.finartz_project.configuration;
 
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.entity.RoleEntity;
+import com.example.finartz_project.model.enumeration.Roles;
 import com.example.finartz_project.repository.MemberRepository;
 import com.example.finartz_project.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class DBInit {
 
         roleEntity.setMember(memberEntity);
         roleEntity1.setMember(memberEntity1);
-        roleEntity.setTitle("USER");
-        roleEntity1.setTitle("ADMIN");
+        roleEntity.setTitle(Roles.INTERN);
+        roleEntity1.setTitle(Roles.TEAMLEAD);
 
         roleRepository.save(roleEntity);
         roleRepository.save(roleEntity1);

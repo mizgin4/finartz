@@ -1,13 +1,15 @@
 package com.example.finartz_project.controller.response;
 
-public class AddRoleResponse {
-    private String title;
+import com.example.finartz_project.model.enumeration.Roles;
 
-    public String getTitle() {
+public class AddRoleResponse {
+    private Roles title;
+
+    public Roles getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Roles title) {
         this.title = title;
     }
 }

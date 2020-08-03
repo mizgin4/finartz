@@ -1,4 +1,6 @@
 package com.example.finartz_project.model.entity;
+import com.example.finartz_project.model.enumeration.Roles;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,7 @@ public class RoleEntity {
     private MemberEntity member;
 
     @Column(name = "TITLE")
-    private String title;
+    private Roles title;
 
 
     public Long getRoleId() {
@@ -42,11 +44,11 @@ public class RoleEntity {
         this.member = member;
     }
 
-    public String getTitle() {
+    public Roles getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(Roles title) {
         this.title = title;
     }
 }

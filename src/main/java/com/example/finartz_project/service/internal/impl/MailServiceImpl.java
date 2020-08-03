@@ -1,11 +1,12 @@
 package com.example.finartz_project.service.internal.impl;
 
-import com.example.finartz_project.controller.request.CreateDemandRequest;
+
 import com.example.finartz_project.controller.request.CreateMemberRequest;
 import com.example.finartz_project.model.dto.DemandDto;
-import com.example.finartz_project.model.dto.MemberDto;
+
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.entity.RoleEntity;
+import com.example.finartz_project.model.enumeration.Roles;
 import com.example.finartz_project.repository.MemberRepository;
 import com.example.finartz_project.repository.RoleRepository;
 import com.example.finartz_project.service.internal.MailService;
@@ -16,9 +17,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Optional;
+
 
 @Component
 public class MailServiceImpl implements MailService {
@@ -27,11 +26,13 @@ public class MailServiceImpl implements MailService {
     private final MemberRepository memberRepository;
     private final RoleRepository roleRepository;
 
+
     @Autowired
     public MailServiceImpl(JavaMailSender javaMailSender, MemberRepository memberRepository, RoleRepository roleRepository) {
         this.javaMailSender = javaMailSender;
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
+
     }
 
     public void sendNotification(CreateMemberRequest request) throws MailException {
@@ -47,14 +48,12 @@ public class MailServiceImpl implements MailService {
     @Override
     public void sendDemandNotification(DemandDto demandDto) throws MailException {
 
-        Hashtable<String, String> my_dict = new Hashtable<String, String>();
-        my_dict.put("USER", "ADMIN");
 
 
-        RoleEntity roleEntity = roleRepository.findByMember_MemberId(demandDto.getMemberId());//Burda elimde request gonderenin rolu var
+        RoleEntity roleEntity = roleRepository.findByMemberMemberId(demandDto.getMemberId());//Burda elimde request gonderenin rolu var
         switch (roleEntity.getTitle()) {
-            case "USER":
-                RoleEntity roleEntity1 = roleRepository.findByTitle("ADMIN");
+            case INTERN:
+                RoleEntity roleEntity1 = roleRepository.findByTitle(Roles.TEAMLEAD);
                 MemberEntity memberEntity = memberRepository.findByMemberId(roleEntity1.getMember().getMemberId());
 
 

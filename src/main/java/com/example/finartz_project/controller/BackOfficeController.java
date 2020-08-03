@@ -16,11 +16,11 @@ import javax.validation.Valid;
 @RestController
 
 @RequestMapping("/auth")
-public class HrMemberCreateController {
+public class BackOfficeController {
     private final MemberService memberService;
     private MailServiceImpl mailServiceImpl;
 
-    public HrMemberCreateController(MemberService memberService, MailServiceImpl mailServiceImpl) {
+    public BackOfficeController(MemberService memberService, MailServiceImpl mailServiceImpl) {
         this.memberService = memberService;
         this.mailServiceImpl = mailServiceImpl;
     }

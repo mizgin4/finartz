@@ -2,14 +2,15 @@ package com.example.finartz_project.controller.response;
 
 public class UpdatePasswordResponse {
 
-    private String password;
 
-    public String getPassword() {
-        return password;
+    private String mesg = "Your new password has been changed";
+
+
+    public String getMesg() {
+        return mesg;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMesg(String mesg) {
+        this.mesg = mesg;
     }
-
 }

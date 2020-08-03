@@ -23,26 +23,8 @@ public class LoginController {
     }
 
 
-    @PostMapping("/signedin")
+    @PostMapping("/login")
     public ResponseEntity<String> memberSignIn(@RequestBody SignInRequest request) {
         return ResponseEntity.ok(memberService.signIn(request));
     }
 }
-
-//    @PostMapping("/permit")
-//    public String permit(){
-//        return "Permitted";
-//    }
-
-
-
-
-//    //adminUpdating'e taşı
-//    @PostMapping("/signup")
-//    public ResponseEntity<CreateMemberResponse> createMember(
-//            @Valid @RequestBody @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) CreateMemberRequest request)
-//            throws Exception {
-//        //notificationService.sendNotification(request);
-//        return ResponseEntity.ok(memberService.createMember(request));
-//    }
-//
