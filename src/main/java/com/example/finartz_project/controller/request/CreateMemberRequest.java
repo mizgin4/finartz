@@ -1,6 +1,6 @@
 package com.example.finartz_project.controller.request;
 
-import com.example.finartz_project.model.dto.RoleDto;
+
 import com.example.finartz_project.model.entity.RoleEntity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,7 +14,7 @@ public class CreateMemberRequest {
 
     private String lastName;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime birthDay;
 
     @Email

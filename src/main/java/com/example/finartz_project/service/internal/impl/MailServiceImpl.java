@@ -4,6 +4,7 @@ package com.example.finartz_project.service.internal.impl;
 import com.example.finartz_project.controller.request.CreateMemberRequest;
 import com.example.finartz_project.model.dto.DemandDto;
 
+import com.example.finartz_project.model.dto.MemberDto;
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.entity.RoleEntity;
 import com.example.finartz_project.model.enumeration.Roles;
@@ -86,5 +87,15 @@ public class MailServiceImpl implements MailService {
         String newPasswordd = newPassword.toString();
 
         return newPasswordd;
+    }
+
+    @Override
+    public void sendBirthDayNotification(MemberDto memberDto) throws MailException {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(memberDto.getEmail());
+        mailMessage.setSubject("HR@noreply");
+        mailMessage.setText("We wish Happy BirtDay to"+ memberDto.getName());
+        javaMailSender.send(mailMessage);
+
     }
 }
