@@ -6,6 +6,7 @@ public enum Roles {
     CTO,
     CEO,
     INTERN,
+    BACKOFFICE
 
 
 }

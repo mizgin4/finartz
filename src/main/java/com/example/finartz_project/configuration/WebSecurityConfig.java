@@ -47,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/member/**").hasRole("MEMBER")
-                .antMatchers("/memberdemands/**").hasRole("ADMIN")
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/**").hasRole("BACKOFFICE")
+                .antMatchers("/signin/**","/memberdemands/**","/member/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();
     }
@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         webSecurity.ignoring()
                 .antMatchers("/auth/**")
                 .antMatchers("/h2-console/**");
+
 
     }
 //    @Autowired
