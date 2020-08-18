@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 @Configuration
 @EnableScheduling
@@ -28,22 +29,23 @@ public class BirthDayMail {
 
     @Scheduled(cron="*/5 * * * * *", zone="Europe/Istanbul")
     public void sendBirthdayMail() {
-        List<MemberDto> members = convert(memberRepository.findAll());
+        List<MemberEntity> memberEntities = memberRepository.findAll();
+        List<MemberDto> members = convert(memberEntities);
         if (members.size()>0){
 
-            for (MemberDto memberDto : members) {
+            members.stream()
+                    .filter(isMemberBirthDateToday())
+                    .forEach(member->{
+                        //mailService.sendBirthDayNotification(memberDto);
+                        System.out.println("It has an empty body");
 
-                if (memberDto.getBirthDay().getMonth()==LocalDateTime.now().getMonth()
-                        &&memberDto.getBirthDay().getDayOfMonth()==LocalDateTime.now().getDayOfMonth()){
-                    //mailService.sendBirthDayNotification((MemberDto) members);
-                    System.out.println("It has an empty body");
-                }
-
-
-            }
-
+                    });
         }
 
+    }
+    private Predicate<MemberDto> isMemberBirthDateToday(){
+        return memberDto -> memberDto.getBirthDay().getMonth().equals(LocalDateTime.now().getMonth())
+                &&memberDto.getBirthDay().getDayOfMonth()==LocalDateTime.now().getDayOfMonth();
     }
     @NotNull
     public List<MemberDto> convert(List<MemberEntity>  source) {
@@ -64,6 +66,17 @@ public class BirthDayMail {
         return target;
 
     }
+
+    //            for (MemberDto memberDto : members) {
+//
+//                if (memberDto.getBirthDay().getMonth().equals(LocalDateTime.now().getMonth())
+//                        &&memberDto.getBirthDay().getDayOfMonth()==LocalDateTime.now().getDayOfMonth()){
+//                    //mailService.sendBirthDayNotification(memberDto);
+//                    System.out.println("It has an empty body");
+//                }
+//
+//
+//            }
 
 }
 

@@ -6,6 +6,7 @@ import com.example.finartz_project.model.dto.RoleDto;
 import com.example.finartz_project.model.entity.DemandEntity;
 import com.example.finartz_project.model.entity.MemberEntity;
 import com.example.finartz_project.model.entity.RoleEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Component
 public class MemberEntityConverter {
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
     public MemberEntity convert(MemberDto source, String password) {
@@ -88,5 +90,9 @@ public class MemberEntityConverter {
         roleEntity.setTitle(roleDto.getTitle());
 
         return roleEntity;
+    }
+
+    private String passwordEncoder(String password) {
+        return encoder.encode(password);
     }
 }

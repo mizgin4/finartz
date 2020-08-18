@@ -3,6 +3,7 @@ package com.example.finartz_project.controller;
 import com.example.finartz_project.model.dto.DemandDto;
 import com.example.finartz_project.repository.DemandRepository;
 import com.example.finartz_project.service.DemandService;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class MemberLoadingController {
     }
 
     @GetMapping("/alldemands")
+
     public ResponseEntity<List<DemandDto>> getallDemands(){
         return ResponseEntity.ok(demandService.getAllDemands());
     }

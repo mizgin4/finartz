@@ -14,6 +14,7 @@ import com.example.finartz_project.service.MemberService;
 import com.example.finartz_project.service.converter.CreateMemberRequestConverter;
 import com.example.finartz_project.service.converter.MemberEntityConverter;
 import com.example.finartz_project.service.internal.MailService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -25,6 +26,8 @@ class MemberServiceImpl implements MemberService {
     private final MailService mailService;
     private final CreateMemberRequestConverter createMemberRequestConverter;
     private final MemberEntityConverter memberEntityConverter;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
     MemberServiceImpl(MemberRepository memberRepository, MailService mailService,
                       CreateMemberRequestConverter createMemberRequestConverter,
@@ -44,27 +47,26 @@ class MemberServiceImpl implements MemberService {
             throw new Exception("Member already exist");
         }
 
-        String password = mailService.generatePassword();
-        //PASSWORD U MEMBER ENTITY E AL
+        String password = passwordEncoder(mailService.generatePassword());
+
         MemberDto memberDto = createMemberRequestConverter.convert(request);
 
         MemberEntity memberEntity = memberEntityConverter.convert(memberDto,password);
 
         memberRepository.save(memberEntity);
         memberDto.setMemberId(memberEntity.getMemberId());
-        //For sending passwords via mails.Works but closed for dev. purposes
         //mailService.sendNotification(request);
 
         return getResponse(memberDto);
     }
-
+//request.getOldPassword().equals(memberEntity.get().getPassword()) && request.getName().equals(memberEntity.get().getName())
     //FindByMemberId ile bagladim
     @Override
     public UpdatePasswordResponse updatePassword(UpdatePasswordRequest request, Long id) throws Exception {
         Optional<MemberEntity> memberEntity= Optional.ofNullable(memberRepository.findByMemberId(id));
         if (memberEntity.isPresent()) {
-            if (request.getOldPassword().equals(memberEntity.get().getPassword()) && request.getName().equals(memberEntity.get().getName())) {
-                memberEntity.get().setPassword(request.getNewPassword());
+            if (encoder.matches(request.getOldPassword(),memberEntity.get().getPassword())&&request.getName().equals(memberEntity.get().getName())) {
+                memberEntity.get().setPassword(passwordEncoder(request.getNewPassword()));
                 memberRepository.save(memberEntity.get());
                 return updateResponse();
             }else{
@@ -81,7 +83,7 @@ class MemberServiceImpl implements MemberService {
 
         if(optionalMemberEntity.isPresent()){
             MemberEntity member = memberRepository.getMemberEntityByEmail(request.getEmail());
-            if (member.getPassword().equals(request.getPassword()) && member.getEmail().equals(request.getEmail())) {
+            if (encoder.matches(member.getPassword(),request.getPassword()) && member.getEmail().equals(request.getEmail())) {
                 return "Succesfully signed in";
             }
         }
@@ -117,5 +119,9 @@ class MemberServiceImpl implements MemberService {
         response.setEmail(memberDto.getEmail());
 
         return response;
+    }
+
+    private String passwordEncoder(String password) {
+        return encoder.encode(password);
     }
 }
